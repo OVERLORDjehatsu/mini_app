@@ -6,7 +6,7 @@
     <title>Draggable Curtain</title>
     <style>
         body {
-            background-color: #141414;
+            background-color: #141414; /* Основной фон */
             margin: 0;
             height: 100vh;
             overflow: hidden;
@@ -15,13 +15,14 @@
 
         .curtain {
             position: absolute;
-            top: 100%;
+            top: 50%; /* Начальная позиция - центр экрана */
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: white;
+            background-color: #EBEBEB; /* Цвет шторки */
             transition: top 0.3s;
             touch-action: none;
+            transform: translateY(-50%);
         }
     </style>
 </head>
@@ -31,7 +32,7 @@
     <script>
         const curtain = document.getElementById('curtain');
         let startY;
-        let curtainTop = 100;
+        let curtainTop = 50; // Начальная позиция в процентах
 
         curtain.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
@@ -40,8 +41,8 @@
 
         curtain.addEventListener('touchmove', (e) => {
             const touchY = e.touches[0].clientY;
-            const moveDistance = touchY - startY;
-            curtainTop = Math.max(0, Math.min(100, curtainTop + (moveDistance / window.innerHeight) * 100));
+            const moveDistance = startY - touchY;
+            curtainTop = Math.max(0, Math.min(100, curtainTop - (moveDistance / window.innerHeight) * 100));
 
             curtain.style.top = `${curtainTop}%`;
             startY = touchY;
