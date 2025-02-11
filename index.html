@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Draggable Curtain</title>
+    <title>Auto-Rising Curtain</title>
     <style>
         body {
             background-color: #141414; /* Основной фон */
@@ -15,44 +15,25 @@
 
         .curtain {
             position: absolute;
-            top: 50%; /* Начальная позиция - центр экрана */
+            top: 100%; /* Начальная позиция - вне экрана */
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #EBEBEB; /* Цвет шторки */
-            transition: top 0.3s;
+            background-color: white; /* Цвет шторки */
             touch-action: none;
-            transform: translateY(-50%);
+            transform: translateY(-100%);
+            animation: rise 0.5s ease-out forwards; /* Анимация подъема */
             border-radius: 20px; /* Закругленные углы */
         }
 
+        @keyframes rise {
+            to {
+                top: 50%; /* Конечная позиция - середина экрана */
+            }
+        }
     </style>
 </head>
 <body>
     <div class="curtain" id="curtain"></div>
-
-    <script>
-        const curtain = document.getElementById('curtain');
-        let startY;
-        let curtainTop = 60; // Начальная позиция в процентах
-
-        curtain.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-            curtain.style.transition = 'none';
-        });
-
-        curtain.addEventListener('touchmove', (e) => {
-            const touchY = e.touches[0].clientY;
-            const moveDistance = startY - touchY;
-            curtainTop = Math.max(0, Math.min(100, curtainTop - (moveDistance / window.innerHeight) * 100));
-
-            curtain.style.top = `${curtainTop}%`;
-            startY = touchY;
-        });
-
-        curtain.addEventListener('touchend', () => {
-            curtain.style.transition = 'top 0.3s';
-        });
-    </script>
 </body>
 </html>
