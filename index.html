@@ -6,62 +6,12 @@
     <title>Welcome</title>
     <style>
         body {
-            background-color: #141414;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #141414; /* Фон цвета #141414 */
             margin: 0;
-            font-family: Arial, sans-serif;
-            position: relative;
-            overflow: hidden;
-            flex-direction: column;
-        }
-        h1 {
-            color: black;
-            z-index: 1;
-        }
-        .popup {
-            position: absolute;
-            bottom: -50px; /* Начальная позиция - вне экрана */
-            background-color: black;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            animation: slideUp 3s forwards; /* Анимация слайдера */
-            z-index: 2;
-        }
-        @keyframes slideUp {
-            0% {
-                bottom: -50px;
-            }
-            100% {
-                bottom: 50%; /* Конечная позиция в середине экрана */
-                transform: translateY(50%);
-            }
-        }
-        .button-container {
-            margin-top: 20px;
-        }
-        .button-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .button-container button:hover {
-            background-color: #555;
+            height: 100vh;
         }
     </style>
 </head>
 <body>
-    <h1>ПРИВЕТ ГАВНОЕД😁!</h1>
-    <div class="popup">Сасал?</div>
-    <div class="button-container">
-        <button>Да</button>
-    </div>
 </body>
 </html>
