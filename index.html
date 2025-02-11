@@ -23,7 +23,9 @@
             transition: top 0.3s;
             touch-action: none;
             transform: translateY(-50%);
+            border-radius: 20px; /* Закругленные углы */
         }
+
     </style>
 </head>
 <body>
@@ -32,7 +34,7 @@
     <script>
         const curtain = document.getElementById('curtain');
         let startY;
-        let curtainTop = 50; // Начальная позиция в процентах
+        let curtainTop = 60; // Начальная позиция в процентах
 
         curtain.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
