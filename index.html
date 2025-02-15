@@ -107,7 +107,7 @@
 
         /* Увеличиваем отступ для последней кнопки */
         .big-button:last-child {
-            margin-bottom: 40px; /* Увеличиваем отступ снизу */
+            margin-bottom: 55px; /* Увеличиваем отступ снизу (40px + 15px) */
         }
 
         /* Стили для шторки */
@@ -170,6 +170,13 @@
             padding: 10px 0;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Тень сверху */
             z-index: 1001; /* Панель поверх шторки */
+            transition: opacity 0.3s ease; /* Плавное исчезновение */
+        }
+
+        /* Скрытие панели */
+        .bottom-panel.hidden {
+            opacity: 0; /* Плавное исчезновение */
+            pointer-events: none; /* Отключаем клики */
         }
 
         /* Стили для кнопок на панели */
@@ -257,6 +264,7 @@
         function openDrawer(drawerId, closeBtnId) {
             const drawer = document.getElementById(drawerId);
             const closeBtn = document.getElementById(closeBtnId);
+            const bottomPanel = document.querySelector('.bottom-panel'); // Получаем панель
 
             // Блокируем все кнопки
             const buttons = document.querySelectorAll('.button, .big-button');
@@ -266,6 +274,9 @@
 
             // Добавляем размытие фона
             document.body.classList.add('blurred');
+
+            // Скрываем панель
+            bottomPanel.classList.add('hidden');
 
             // Открываем шторку
             drawer.style.bottom = '0';
@@ -278,6 +289,9 @@
 
                 // Убираем размытие фона
                 document.body.classList.remove('blurred');
+
+                // Показываем панель
+                bottomPanel.classList.remove('hidden');
 
                 // Разблокируем все кнопки
                 buttons.forEach(button => {
