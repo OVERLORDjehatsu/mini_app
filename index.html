@@ -11,8 +11,8 @@
             padding: 0;
             background-color: #DCDCDC; /* Светло-серый цвет */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Центрирование по горизонтали */
+            align-items: center; /* Центрирование по вертикали */
             height: 100vh; /* Занимает всю высоту экрана */
             font-family: Arial, sans-serif;
         }
@@ -20,7 +20,7 @@
         /* Контейнер для кнопок */
         .button-container {
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Кнопки будут вертикально */
             gap: 20px; /* Расстояние между кнопками */
         }
 
@@ -49,17 +49,5 @@
         <button class="button">АКЦИЯ ДНЯ</button>
         <button class="button">НОВОСТИ</button>
     </div>
-
-    <script>
-        // JavaScript код (если нужно)
-        // Например, можно добавить взаимодействие с Telegram Web App API
-        Telegram.WebApp.ready();
-
-        // Пример отправки данных в бота
-        function sendData() {
-            const data = { message: "Hello from Mini App!" };
-            Telegram.WebApp.sendData(JSON.stringify(data));
-        }
-    </script>
 </body>
 </html>
