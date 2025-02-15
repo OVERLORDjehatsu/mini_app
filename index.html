@@ -3,20 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Image</title>
+    <title>Telegram Mini App</title>
     <style>
+        /* Устанавливаем фон для всей страницы */
         body {
             margin: 0;
-            height: 100vh;
-            overflow: hidden;
-            position: relative;
-            background-image: url('https://imgur.com/a/g83UoYf'); /* Устанавливаем изображение фоном */
-            background-size: cover; /* Масштабируем изображение, чтобы оно покрывало весь экран */
-            background-position: center; /* Центрируем изображение */
-            background-repeat: no-repeat; /* Избегаем повторения изображения */
+            padding: 0;
+            background-color: #DCDCDC; /* Светло-серый цвет */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Занимает всю высоту экрана */
+            font-family: Arial, sans-serif;
+        }
+
+        /* Дополнительный стиль для текста (если нужно) */
+        .content {
+            text-align: center;
+            color: #333; /* Темно-серый цвет текста */
         }
     </style>
 </head>
 <body>
+    <div class="content">
+        <h1>Welcome to Mini App!</h1>
+        <p>This is a simple Telegram Mini App with a light gray background.</p>
+    </div>
+
+    <script>
+        // JavaScript код (если нужно)
+        // Например, можно добавить взаимодействие с Telegram Web App API
+        Telegram.WebApp.ready();
+
+        // Пример отправки данных в бота
+        function sendData() {
+            const data = { message: "Hello from Mini App!" };
+            Telegram.WebApp.sendData(JSON.stringify(data));
+        }
+    </script>
 </body>
 </html>
