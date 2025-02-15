@@ -17,9 +17,6 @@
             height: 100vh; /* Занимает всю высоту экрана */
             font-family: Arial, sans-serif;
             padding: 20px; /* Отступы вокруг контента */
-            box-sizing: border-box; /* Учитываем padding в общей высоте */
-            position: relative; /* Для позиционирования шторки */
-            overflow: hidden; /* Чтобы шторка не вызывала прокрутку */
         }
 
         /* Контейнер для верхних кнопок */
@@ -96,40 +93,6 @@
         .big-button:last-child {
             margin-bottom: 40px; /* Увеличиваем отступ снизу */
         }
-
-Python, [15.02.2025 22:54]
-/* Стили для шторки */
-        .drawer {
-            position: fixed;
-            bottom: -50%; /* Начальное положение шторки (скрыта) */
-            left: 0;
-            width: 100%;
-            height: 50%; /* Высота шторки до середины экрана */
-            background-color: white;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            transition: bottom 0.3s ease; /* Плавное выдвижение */
-            z-index: 1000; /* Шторка поверх всего контента */
-        }
-
-        /* Крестик для закрытия шторки */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #333;
-        }
-
-        /* Контент внутри шторки */
-        .drawer-content {
-            padding: 20px;
-            color: #333;
-        }
     </style>
 </head>
 <body>
@@ -141,35 +104,9 @@ Python, [15.02.2025 22:54]
     </div>
 
     <!-- Нижняя кнопка -->
-    <button class="big-button" id="openDrawerBtn">НИЖНЯЯ КНОПКА</button>
+    <button class="big-button">НИЖНЯЯ КНОПКА</button>
 
     <!-- Вторая нижняя кнопка -->
     <button class="big-button">НИЖНЯЯ КНОПКА</button>
-
-    <!-- Шторка -->
-    <div class="drawer" id="drawer">
-        <button class="close-btn" id="closeDrawerBtn">&times;</button>
-        <div class="drawer-content">
-            <h2>Дополнительная информация</h2>
-            <p>Здесь может быть любой текст или контент, который вы хотите отобразить в шторке.</p>
-        </div>
-    </div>
-
-    <script>
-        // Получаем элементы
-        const openDrawerBtn = document.getElementById('openDrawerBtn');
-        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
-        const drawer = document.getElementById('drawer');
-
-        // Открываем шторку при нажатии на кнопку
-        openDrawerBtn.addEventListener('click', () => {
-            drawer.style.bottom = '0'; // Выдвигаем шторку
-        });
-
-        // Закрываем шторку при нажатии на крестик
-        closeDrawerBtn.addEventListener('click', () => {
-            drawer.style.bottom = '-50%'; // Скрываем шторку
-        });
-    </script>
 </body>
 </html>
