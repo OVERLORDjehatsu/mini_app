@@ -19,7 +19,6 @@
             padding: 20px; /* Отступы вокруг контента */
             box-sizing: border-box; /* Учитываем padding в общей высоте */
             position: relative; /* Для позиционирования шторки */
-            /* Убираем overflow: hidden */
         }
 
         /* Контейнер для верхних кнопок */
@@ -100,17 +99,17 @@
         /* Стили для шторки */
         .drawer {
             position: fixed;
-            bottom: -50%; /* Начальное положение шторки (скрыта) */
+            bottom: -60%; /* Начальное положение шторки (скрыта) */
             left: 0;
             width: 100%;
-            height: 50%; /* Высота шторки до середины экрана */
-            background-color: #AAAAAA; /* Новый цвет шторки */
+            height: 60%; /* Высота шторки до 60% экрана */
+            background-color: #AAAAAA; /* Цвет шторки */
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
             transition: bottom 0.3s ease; /* Плавное выдвижение */
             z-index: 1000; /* Шторка поверх всего контента */
-            overflow: hidden; /* Добавляем overflow: hidden для шторки */
+            overflow: hidden; /* Чтобы содержимое шторки не вызывало прокрутку */
         }
 
         /* Крестик для закрытия шторки */
@@ -142,43 +141,80 @@
 <body>
     <!-- Контейнер для верхних кнопок -->
     <div class="button-container">
-        <button class="button">РАБОТАЙ С НАМИ</button>
-        <button class="button">АКЦИЯ ДНЯ</button>
-        <button class="button">НОВОСТИ</button>
+        <button class="button" id="button1">РАБОТАЙ С НАМИ</button>
+        <button class="button" id="button2">АКЦИЯ ДНЯ</button>
+        <button class="button" id="button3">НОВОСТИ</button>
     </div>
 
     <!-- Нижняя кнопка -->
-    <button class="big-button" id="openDrawerBtn">НИЖНЯЯ КНОПКА</button>
+    <button class="big-button" id="button4">НИЖНЯЯ КНОПКА</button>
 
     <!-- Вторая нижняя кнопка -->
-    <button class="big-button">НИЖНЯЯ КНОПКА</button>
+    <button class="big-button" id="button5">НИЖНЯЯ КНОПКА</button>
 
-    <!-- Шторка -->
-    <div class="drawer" id="drawer">
-        <button class="close-btn" id="closeDrawerBtn">&times;</button>
+    <!-- Шторки для каждой кнопки -->
+    <div class="drawer" id="drawer1">
+        <button class="close-btn" id="closeDrawer1">&times;</button>
         <div class="drawer-content">
-            <h2>Дополнительная информация</h2>
-            <p>Здесь может быть любой текст или контент, который вы хотите отобразить в шторке.</p>
+            <h2>Информация для "РАБОТАЙ С НАМИ"</h2>
+            <p>Здесь будет информация о работе с нами.</p>
+        </div>
+    </div>
+
+    <div class="drawer" id="drawer2">
+        <button class="close-btn" id="closeDrawer2">&times;</button>
+        <div class="drawer-content">
+            <h2>Информация для "АКЦИЯ ДНЯ"</h2>
+            <p>Здесь будет информация об акции дня.</p>
+        </div>
+    </div>
+
+    <div class="drawer" id="drawer3">
+        <button class="close-btn" id="closeDrawer3">&times;</button>
+        <div class="drawer-content">
+            <h2>Информация для "НОВОСТИ"</h2>
+            <p>Здесь будут новости.</p>
+        </div>
+    </div>
+
+    <div class="drawer" id="drawer4">
+        <button class="close-btn" id="closeDrawer4">&times;</button>
+        <div class="drawer-content">
+            <h2>Информация для нижней кнопки 1</h2>
+            <p>Здесь будет информация для первой нижней кнопки.</p>
+        </div>
+    </div>
+
+    <div class="drawer" id="drawer5">
+        <button class="close-btn" id="closeDrawer5">&times;</button>
+        <div class="drawer-content">
+            <h2>Информация для нижней кнопки 2</h2>
+            <p>Здесь будет информация для второй нижней кнопки.</p>
         </div>
     </div>
 
     <script>
-        // Получаем элементы
-        const openDrawerBtn = document.getElementById('openDrawerBtn');
-        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
-        const drawer = document.getElementById('drawer');
+        // Функция для открытия шторки
+        function openDrawer(drawerId, closeBtnId) {
+            const drawer = document.getElementById(drawerId);
+            const closeBtn = document.getElementById(closeBtnId);
 
-        // Открываем шторку при нажатии на кнопку
-        openDrawerBtn.addEventListener('click', () => {
-            drawer.style.bottom = '0'; // Выдвигаем шторку
-            drawer.classList.add('active'); // Добавляем класс для показа крестика
-        });
+            drawer.style.bottom = '0'; // Открываем шторку
+            drawer.classList.add('active'); // Показываем крестик
 
-        // Закрываем шторку при нажатии на крестик
-        closeDrawerBtn.addEventListener('click', () => {
-            drawer.style.bottom = '-50%'; // Скрываем шторку
-            drawer.classList.remove('active'); // Убираем класс для скрытия крестика
-        });
+            // Закрываем шторку при нажатии на крестик
+            closeBtn.addEventListener('click', () => {
+                drawer.style.bottom = '-60%'; // Закрываем шторку
+                drawer.classList.remove('active'); // Скрываем крестик
+            });
+        }
+
+        // Назначаем обработчики для каждой кнопки
+        document.getElementById('button1').addEventListener('click', () => openDrawer('drawer1', 'closeDrawer1'));
+        document.getElementById('button2').addEventListener('click', () => openDrawer('drawer2', 'closeDrawer2'));
+        document.getElementById('button3').addEventListener('click', () => openDrawer('drawer3', 'closeDrawer3'));
+        document.getElementById('button4').addEventListener('click', () => openDrawer('drawer4', 'closeDrawer4'));
+        document.getElementById('button5').addEventListener('click', () => openDrawer('drawer5', 'closeDrawer5'));
     </script>
 </body>
 </html>
