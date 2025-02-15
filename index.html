@@ -42,6 +42,12 @@
             flex: 1; /* Равномерное распределение ширины */
         }
 
+        /* Убираем синий квадрат при фокусе */
+        .button:focus, .big-button:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
         /* Дополнительные стили для кнопок (при наведении) */
         .button:hover {
             background-color: #E6E6E6; /* Новый цвет при наведении */
@@ -59,7 +65,6 @@
             text-decoration: none;
             transition: background-color 0.3s ease; /* Плавное изменение цвета */
             width: 100%; /* Ширина равна ширине трех верхних кнопок */
-            height: 40%; /* Высота на 5 пикселей меньше ширины */
             aspect-ratio: 1 / 1; /* Соотношение сторон 1:1 (высота равна ширине) */
             display: flex;
             justify-content: center;
