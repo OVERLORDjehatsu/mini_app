@@ -38,9 +38,14 @@
             cursor: pointer;
             text-align: center;
             text-decoration: none;
-            transition: background-color 0.3s ease; /* Плавное изменение цвета */
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Плавное изменение цвета и анимация */
             flex: 1; /* Равномерное распределение ширины */
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку на мобильных устройствах */
+        }
+
+        /* Анимация при нажатии */
+        .button:active {
+            transform: scale(0.95); /* Уменьшаем кнопку на 5% */
         }
 
         /* Убираем синий квадрат при фокусе */
@@ -64,13 +69,18 @@
             cursor: pointer;
             text-align: center;
             text-decoration: none;
-            transition: background-color 0.3s ease; /* Плавное изменение цвета */
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Плавное изменение цвета и анимация */
             width: 100%; /* Ширина равна ширине трех верхних кнопок */
             aspect-ratio: 1 / 1; /* Соотношение сторон 1:1 (высота равна ширине) */
             display: flex;
             justify-content: center;
             align-items: center;
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку на мобильных устройствах */
+        }
+
+        /* Анимация при нажатии */
+        .big-button:active {
+            transform: scale(0.95); /* Уменьшаем кнопку на 5% */
         }
 
         /* Дополнительные стили для нижней кнопки (при наведении) */
