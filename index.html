@@ -19,6 +19,12 @@
             padding: 20px; /* Отступы вокруг контента */
             box-sizing: border-box; /* Учитываем padding в общей высоте */
             position: relative; /* Для позиционирования шторки */
+            transition: filter 0.3s ease; /* Плавное размытие фона */
+        }
+
+        /* Размытие фона при открытии шторки */
+        body.blurred {
+            filter: blur(5px); /* Размытие фона */
         }
 
         /* Контейнер для верхних кнопок */
@@ -136,6 +142,12 @@
             padding: 20px;
             color: #333;
         }
+
+        /* Блокировка кнопок */
+        .button.disabled, .big-button.disabled {
+            pointer-events: none; /* Отключаем клики */
+            opacity: 0.5; /* Делаем кнопки полупрозрачными */
+        }
     </style>
 </head>
 <body>
@@ -199,13 +211,31 @@
             const drawer = document.getElementById(drawerId);
             const closeBtn = document.getElementById(closeBtnId);
 
-            drawer.style.bottom = '0'; // Открываем шторку
-            drawer.classList.add('active'); // Показываем крестик
+            // Блокируем все кнопки
+            const buttons = document.querySelectorAll('.button, .big-button');
+            buttons.forEach(button => {
+                button.classList.add('disabled');
+            });
+
+            // Добавляем размытие фона
+            document.body.classList.add('blurred');
+
+            // Открываем шторку
+            drawer.style.bottom = '0';
+            drawer.classList.add('active');
 
             // Закрываем шторку при нажатии на крестик
             closeBtn.addEventListener('click', () => {
-                drawer.style.bottom = '-60%'; // Закрываем шторку
-                drawer.classList.remove('active'); // Скрываем крестик
+                drawer.style.bottom = '-60%';
+                drawer.classList.remove('active');
+
+                // Убираем размытие фона
+                document.body.classList.remove('blurred');
+
+                // Разблокируем все кнопки
+                buttons.forEach(button => {
+                    button.classList.remove('disabled');
+                });
             });
         }
 
