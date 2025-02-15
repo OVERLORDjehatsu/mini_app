@@ -156,6 +156,38 @@
             pointer-events: none; /* Отключаем клики */
             opacity: 0.5; /* Делаем кнопки полупрозрачными */
         }
+
+        /* Стили для нижней панели */
+        .bottom-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #FFFFFF; /* Белый цвет фона */
+            display: flex;
+            justify-content: space-around; /* Равномерное распределение кнопок */
+            align-items: center;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Тень сверху */
+            z-index: 1001; /* Панель поверх шторки */
+        }
+
+        /* Стили для кнопок на панели */
+        .panel-button {
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: #333; /* Цвет текста */
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Анимация при наведении на кнопку */
+        .panel-button:hover {
+            background-color: #F0F0F0; /* Цвет фона при наведении */
+        }
     </style>
 </head>
 <body>
@@ -211,6 +243,13 @@
             <h2>Информация для нижней кнопки 2</h2>
             <p>Здесь будет информация для второй нижней кнопки.</p>
         </div>
+    </div>
+
+    <!-- Панель внизу экрана -->
+    <div class="bottom-panel">
+        <button class="panel-button">Главная</button>
+        <button class="panel-button">Поиск</button>
+        <button class="panel-button">Профиль</button>
     </div>
 
     <script>
