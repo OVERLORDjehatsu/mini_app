@@ -17,17 +17,37 @@
             font-family: Arial, sans-serif;
         }
 
-        /* Дополнительный стиль для текста (если нужно) */
-        .content {
+        /* Контейнер для кнопок */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Расстояние между кнопками */
+        }
+
+        /* Стиль для кнопок */
+        .button {
+            padding: 15px 30px;
+            background-color: #4CAF50; /* Зеленый цвет */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
             text-align: center;
-            color: #333; /* Темно-серый цвет текста */
+            text-decoration: none;
+        }
+
+        /* Дополнительные стили для кнопок (если нужно) */
+        .button:hover {
+            background-color: #45a049; /* Темно-зеленый цвет при наведении */
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>Welcome to Mini App!</h1>
-        <p>This is a simple Telegram Mini App with a light gray background.</p>
+    <div class="button-container">
+        <button class="button">РАБОТАЙ С НАМИ</button>
+        <button class="button">АКЦИЯ ДНЯ</button>
+        <button class="button">НОВОСТИ</button>
     </div>
 
     <script>
