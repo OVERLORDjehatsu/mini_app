@@ -11,24 +11,26 @@
             padding: 0;
             background-color: #DCDCDC; /* Светло-серый цвет */
             display: flex;
+            flex-direction: column; /* Элементы располагаются вертикально */
             justify-content: flex-start; /* Выравнивание по верхнему краю */
             align-items: flex-start; /* Выравнивание по левому краю */
             height: 100vh; /* Занимает всю высоту экрана */
             font-family: Arial, sans-serif;
+            padding: 20px; /* Отступы вокруг контента */
         }
 
-        /* Контейнер для кнопок */
+        /* Контейнер для верхних кнопок */
         .button-container {
             display: flex;
             flex-direction: row; /* Кнопки будут горизонтально */
             gap: 20px; /* Расстояние между кнопками */
-            padding: 20px; /* Отступы вокруг контейнера */
+            margin-bottom: 20px; /* Отступ снизу */
         }
 
         /* Стиль для кнопок */
         .button {
-            padding: 60px 15px; /* Размеры кнопок остаются прежними */
-            background-color: #EBEBEB; /* Новый цвет кнопок */
+            padding: 60px 15px; /* Размеры кнопок */
+            background-color: #EBEBEB; /* Цвет кнопок */
             color: black; /* Черный цвет текста */
             border: none;
             border-radius: 30px;
@@ -37,19 +39,44 @@
             text-align: center;
             text-decoration: none;
             transition: background-color 0.3s ease; /* Плавное изменение цвета */
+            flex: 1; /* Равномерное распределение ширины */
         }
 
         /* Дополнительные стили для кнопок (при наведении) */
         .button:hover {
             background-color: #E6E6E6; /* Новый цвет при наведении */
         }
+
+        /* Стиль для нижней кнопки */
+        .big-button {
+            padding: 60px 15px; /* Высота такая же, как у верхних кнопок */
+            background-color: #EBEBEB; /* Цвет кнопки */
+            color: black; /* Черный цвет текста */
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease; /* Плавное изменение цвета */
+            width: 100%; /* Ширина равна ширине трех верхних кнопок */
+        }
+
+        /* Дополнительные стили для нижней кнопки (при наведении) */
+        .big-button:hover {
+            background-color: #E6E6E6; /* Новый цвет при наведении */
+        }
     </style>
 </head>
 <body>
+    <!-- Контейнер для верхних кнопок -->
     <div class="button-container">
         <button class="button">РАБОТАЙ С НАМИ</button>
         <button class="button">АКЦИЯ ДНЯ</button>
         <button class="button">НОВОСТИ</button>
     </div>
+
+    <!-- Нижняя кнопка -->
+    <button class="big-button">НИЖНЯЯ КНОПКА</button>
 </body>
 </html>
