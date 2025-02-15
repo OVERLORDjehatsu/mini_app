@@ -11,8 +11,8 @@
             padding: 0;
             background-color: #DCDCDC; /* Светло-серый цвет */
             display: flex;
-            justify-content: center; /* Центрирование по горизонтали */
-            align-items: center; /* Центрирование по вертикали */
+            justify-content: flex-start; /* Выравнивание по верхнему краю */
+            align-items: flex-start; /* Выравнивание по левому краю */
             height: 100vh; /* Занимает всю высоту экрана */
             font-family: Arial, sans-serif;
         }
@@ -20,8 +20,9 @@
         /* Контейнер для кнопок */
         .button-container {
             display: flex;
-            flex-direction: column; /* Кнопки будут вертикально */
+            flex-direction: row; /* Кнопки будут горизонтально */
             gap: 20px; /* Расстояние между кнопками */
+            padding: 20px; /* Отступы вокруг контейнера */
         }
 
         /* Стиль для кнопок */
