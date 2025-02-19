@@ -19,6 +19,7 @@
             padding: 20px; /* Отступы вокруг контента */
             box-sizing: border-box; /* Учитываем padding в общей высоте */
             position: relative; /* Для позиционирования шторки */
+            overflow: hidden; /* Чтобы страница не прокручивалась */
         }
 
         /* Затемнение фона при открытии шторки */
@@ -137,6 +138,7 @@
             color: #333;
             transition: opacity 0.3s ease; /* Плавное появление крестика */
             opacity: 0; /* Начальное состояние - невидим */
+            -webkit-tap-highlight-color: transparent; /* Убираем подсветку */
         }
 
         /* Показываем крестик при открытии шторки */
@@ -172,15 +174,9 @@
             transition: opacity 0.3s ease; /* Плавное исчезновение */
         }
 
-        /* Скрытие панели */
-        .bottom-panel.hidden {
-            opacity: 0; /* Плавное исчезновение */
-            pointer-events: none; /* Отключаем клики */
-        }
-
         /* Стили для кнопок на панели */
         .panel-button {
-            background: none;
+            background-color: #DCDCDC; /* Цвет кнопок */
             border: none;
             font-size: 16px;
             color: #333; /* Цвет текста */
@@ -188,27 +184,70 @@
             padding: 10px 20px;
             border-radius: 20px;
             transition: background-color 0.3s ease;
+            -webkit-tap-highlight-color: transparent; /* Убираем подсветку */
         }
 
         /* Анимация при наведении на кнопку */
         .panel-button:hover {
-            background-color: #F0F0F0; /* Цвет фона при наведении */
+            background-color: #C0C0C0; /* Цвет фона при наведении */
+        }
+
+        /* Стили для стрелок */
+        .arrow {
+            background-color: #DCDCDC; /* Цвет стрелок */
+            border: none;
+            font-size: 24px;
+            color: #333; /* Цвет текста */
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%; /* Закругленные стрелки */
+            transition: background-color 0.3s ease;
+            -webkit-tap-highlight-color: transparent; /* Убираем подсветку */
+        }
+
+        /* Анимация при наведении на стрелку */
+        .arrow:hover {
+            background-color: #C0C0C0; /* Цвет фона при наведении */
+        }
+
+        /* Контейнер для страниц */
+        .page-container {
+            display: flex;
+            width: 200%; /* Две страницы */
+            transition: transform 0.3s ease; /* Плавное перелистывание */
+        }
+
+        /* Стили для страниц */
+        .page {
+            width: 100%; /* Ширина одной страницы */
+            flex-shrink: 0; /* Страницы не сжимаются */
         }
     </style>
 </head>
 <body>
-    <!-- Контейнер для верхних кнопок -->
-    <div class="button-container">
-        <button class="button" id="button1">РАБОТАЙ С НАМИ</button>
-        <button class="button" id="button2">АКЦИЯ ДНЯ</button>
-        <button class="button" id="button3">НОВОСТИ</button>
+    <!-- Контейнер для страниц -->
+    <div class="page-container">
+        <!-- Первая страница -->
+        <div class="page">
+            <!-- Контейнер для верхних кнопок -->
+            <div class="button-container">
+                <button class="button" id="button1">РАБОТАЙ С НАМИ</button>
+                <button class="button" id="button2">АКЦИЯ ДНЯ</button>
+                <button class="button" id="button3">НОВОСТИ</button>
+            </div>
+
+            <!-- Нижняя кнопка -->
+            <button class="big-button" id="button4">НИЖНЯЯ КНОПКА</button>
+
+            <!-- Вторая нижняя кнопка -->
+            <button class="big-button" id="button5">НИЖНЯЯ КНОПКА</button>
+        </div>
+
+        <!-- Вторая страница -->
+        <div class="page">
+            <h2 style="padding: 20px;">Это вторая страница</h2>
+        </div>
     </div>
-
-    <!-- Нижняя кнопка -->
-    <button class="big-button" id="button4">НИЖНЯЯ КНОПКА</button>
-
-    <!-- Вторая нижняя кнопка -->
-    <button class="big-button" id="button5">НИЖНЯЯ КНОПКА</button>
 
     <!-- Шторки для каждой кнопки -->
     <div class="drawer" id="drawer1">
@@ -253,9 +292,11 @@
 
     <!-- Панель внизу экрана -->
     <div class="bottom-panel">
+        <button class="arrow" id="arrowLeft">&#10094;</button>
         <button class="panel-button">Главная</button>
         <button class="panel-button">Поиск</button>
         <button class="panel-button">Профиль</button>
+        <button class="arrow" id="arrowRight">&#10095;</button>
     </div>
 
     <script>
@@ -305,6 +346,19 @@
         document.getElementById('button3').addEventListener('click', () => openDrawer('drawer3', 'closeDrawer3'));
         document.getElementById('button4').addEventListener('click', () => openDrawer('drawer4', 'closeDrawer4'));
         document.getElementById('button5').addEventListener('click', () => openDrawer('drawer5', 'closeDrawer5'));
+
+        // Логика для перелистывания страниц
+        const pageContainer = document.querySelector('.page-container');
+        const arrowLeft = document.getElementById('arrowLeft');
+        const arrowRight = document.getElementById('arrowRight');
+
+        arrowLeft.addEventListener('click', () => {
+            pageContainer.style.transform = 'translateX(0)';
+        });
+
+        arrowRight.addEventListener('click', () => {
+            pageContainer.style.transform = 'translateX(-50%)';
+        });
     </script>
 </body>
 </html>
