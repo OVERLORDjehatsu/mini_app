@@ -215,12 +215,18 @@
             display: flex;
             width: 200%; /* Две страницы */
             transition: transform 0.3s ease; /* Плавное перелистывание */
+            height: 100%; /* Занимает всю высоту */
         }
 
         /* Стили для страниц */
         .page {
             width: 100%; /* Ширина одной страницы */
+            height: 100%; /* Высота одной страницы */
             flex-shrink: 0; /* Страницы не сжимаются */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
         }
     </style>
 </head>
@@ -353,11 +359,11 @@
         const arrowRight = document.getElementById('arrowRight');
 
         arrowLeft.addEventListener('click', () => {
-            pageContainer.style.transform = 'translateX(0)';
+            pageContainer.style.transform = 'translateX(0)'; // Возвращаемся на первую страницу
         });
 
         arrowRight.addEventListener('click', () => {
-            pageContainer.style.transform = 'translateX(-50%)';
+            pageContainer.style.transform = 'translateX(-50%)'; // Переходим на вторую страницу
         });
     </script>
 </body>
