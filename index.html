@@ -41,6 +41,7 @@
             flex-direction: row; /* Кнопки будут горизонтально */
             gap: 20px; /* Расстояние между кнопками */
             margin-bottom: 20px; /* Отступ снизу */
+            width: 100%; /* Ширина контейнера равна ширине страницы */
         }
 
         /* Стиль для кнопок */
@@ -86,7 +87,7 @@
             text-align: center;
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.1s ease; /* Плавное изменение цвета и анимация */
-            width: 100%; /* Ширина равна ширине трех верхних кнопок */
+            width: calc(100% / 3 - 13.33px); /* Ширина равна ширине одной из трех верхних кнопок */
             aspect-ratio: 1 / 1; /* Соотношение сторон 1:1 (высота равна ширине) */
             display: flex;
             justify-content: center;
@@ -163,12 +164,12 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
+            width: 100%; /* Панель занимает всю ширину */
             background-color: #DCDCDC; /* Цвет фона */
             display: flex;
-            justify-content: space-around; /* Равномерное распределение кнопок */
+            justify-content: space-between; /* Распределение кнопок и стрелок */
             align-items: center;
-            padding: 10px 0;
+            padding: 10px 20px; /* Отступы внутри панели */
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Черная тень сверху */
             z-index: 1001; /* Панель поверх шторки */
             transition: opacity 0.3s ease; /* Плавное исчезновение */
@@ -215,7 +216,7 @@
             display: flex;
             width: 200%; /* Две страницы */
             transition: transform 0.3s ease; /* Плавное перелистывание */
-            height: 100%; /* Занимает всю высоту */
+            height: calc(100% - 80px); /* Высота минус панель */
         }
 
         /* Стили для страниц */
