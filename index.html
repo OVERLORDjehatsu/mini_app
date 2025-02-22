@@ -58,6 +58,14 @@
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку на мобильных устройствах */
         }
 
+        /* Стиль для кнопки "РАБОТАЙ С НАМИ" */
+        #button1 {
+            background-image: url('https://i.imgur.com/affolDt.png'); /* Ссылка на изображение */
+            background-size: cover; /* Масштабирует изображение на всю кнопку */
+            background-position: center; /* Центрирует изображение */
+            color: transparent; /* Скрываем текст */
+        }
+
         /* Анимация при нажатии */
         .button:active {
             transform: scale(0.95); /* Уменьшаем кнопку на 5% */
@@ -80,14 +88,23 @@
             background-size: cover; /* Масштабирует изображение на всю кнопку */
             background-position: center; /* Центрирует изображение */
             background-color: #EBEBEB; /* Цвет кнопки */
+            color: black; /* Черный цвет текста */
             border: none;
             border-radius: 30px;
+            font-size: 16px;
             cursor: pointer;
-            transition: transform 0.1s ease; /* Плавное изменение цвета и анимация */
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.1s ease; /* Плавное изменение цвета и анимация */
             width: 100%; /* Ширина равна ширине трех верхних кнопок */
             aspect-ratio: 1 / 1; /* Соотношение сторон 1:1 (высота равна ширине) */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку на мобильных устройствах */
             margin-bottom: 20px; /* Отступ между кнопками */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Тень для текста */
+            position: relative; /* Для позиционирования иконки */
         }
 
         /* Анимация при нажатии */
