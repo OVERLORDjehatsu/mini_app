@@ -47,23 +47,28 @@
             padding: 10px 0;
             border-bottom: 2px solid black; /* Черная полоса вместо тени */
             z-index: 1001; /* Панель поверх всего контента */
+            transition: opacity 0.3s ease; /* Плавное затемнение */
         }
 
-        /* Стили для кнопок на панели */
+        /* Затемнение панели при открытии шторки */
+        body.darkened .top-panel {
+            opacity: 0.5; /* Полупрозрачность */
+        }
+
+        /* Стили для кнопок на панели (текст без фона) */
         .panel-button {
-            background-color: #EBEBEB; /* Цвет кнопок */
+            background: none; /* Убираем фон */
             border: none;
             font-size: 16px;
             color: #333; /* Цвет текста */
             cursor: pointer;
-            padding: 10px 20px;
-            border-radius: 20px;
-            transition: background-color 0.3s ease;
+            padding: 10px;
+            transition: color 0.3s ease; /* Плавное изменение цвета текста */
         }
 
         /* Анимация при наведении на кнопку */
         .panel-button:hover {
-            background-color: #E6E6E6; /* Новый цвет при наведении */
+            color: #000; /* Темный цвет текста при наведении */
         }
 
         /* Контейнер для верхних кнопок */
@@ -145,7 +150,7 @@
             justify-content: center;
             align-items: center;
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку на мобильных устройствах */
-            margin-bottom: 20px; /* Отступ между кнопками */
+            margin-bottom: 40px; /* Отступ между кнопкой и нижней стенкой */
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Тень для текста */
             position: relative; /* Для позиционирования иконки */
         }
@@ -158,11 +163,6 @@
         /* Дополнительные стили для нижней кнопки (при наведении) */
         .big-button:hover {
             background-color: #E6E6E6; /* Новый цвет при наведении */
-        }
-
-        /* Увеличиваем отступ для последней кнопки */
-        .big-button:last-child {
-            margin-bottom: 75px; /* Увеличиваем отступ снизу (60px + 15px) */
         }
 
         /* Стили для шторки */
@@ -280,7 +280,6 @@
         function openDrawer(drawerId, closeBtnId) {
             const drawer = document.getElementById(drawerId);
             const closeBtn = document.getElementById(closeBtnId);
-            const topPanel = document.querySelector('.top-panel'); // Получаем панель
 
             // Блокируем все кнопки
             const buttons = document.querySelectorAll('.button, .big-button');
