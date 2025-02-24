@@ -34,12 +34,45 @@
             pointer-events: none; /* Чтобы клики проходили сквозь затемнение */
         }
 
+        /* Панель сверху */
+        .top-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #DCDCDC; /* Цвет фона */
+            display: flex;
+            justify-content: space-around; /* Равномерное распределение кнопок */
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 2px solid black; /* Черная полоса вместо тени */
+            z-index: 1001; /* Панель поверх всего контента */
+        }
+
+        /* Стили для кнопок на панели */
+        .panel-button {
+            background-color: #EBEBEB; /* Цвет кнопок */
+            border: none;
+            font-size: 16px;
+            color: #333; /* Цвет текста */
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Анимация при наведении на кнопку */
+        .panel-button:hover {
+            background-color: #E6E6E6; /* Новый цвет при наведении */
+        }
+
         /* Контейнер для верхних кнопок */
         .button-container {
             display: flex;
             flex-direction: row; /* Кнопки будут горизонтально */
             gap: 20px; /* Расстояние между кнопками */
             margin-bottom: 20px; /* Отступ снизу */
+            margin-top: 80px; /* Отступ сверху, чтобы не перекрывало панель */
         }
 
         /* Стиль для кнопок */
@@ -178,48 +211,16 @@
             pointer-events: none; /* Отключаем клики */
             opacity: 0.5; /* Делаем кнопки полупрозрачными */
         }
-
-        /* Стили для нижней панели */
-        .bottom-panel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #DCDCDC; /* Цвет фона */
-            display: flex;
-            justify-content: space-around; /* Равномерное распределение кнопок */
-            align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Черная тень сверху */
-            z-index: 1001; /* Панель поверх шторки */
-            transition: opacity 0.3s ease; /* Плавное исчезновение */
-        }
-
-        /* Скрытие панели */
-        .bottom-panel.hidden {
-            opacity: 0; /* Плавное исчезновение */
-            pointer-events: none; /* Отключаем клики */
-        }
-
-        /* Стили для кнопок на панели */
-        .panel-button {
-            background-color: #EBEBEB; /* Цвет кнопок */
-            border: none;
-            font-size: 16px;
-            color: #333; /* Цвет текста */
-            cursor: pointer;
-            padding: 10px 20px;
-            border-radius: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Анимация при наведении на кнопку */
-        .panel-button:hover {
-            background-color: #E6E6E6; /* Новый цвет при наведении */
-        }
     </style>
 </head>
 <body>
+    <!-- Панель сверху -->
+    <div class="top-panel">
+        <button class="panel-button">Профиль</button>
+        <button class="panel-button">Главная</button>
+        <button class="panel-button">Рабочее место</button>
+    </div>
+
     <!-- Контейнер для верхних кнопок -->
     <div class="button-container">
         <button class="button" id="button1">РАБОТАЙ С НАМИ</button>
@@ -274,19 +275,12 @@
         </div>
     </div>
 
-    <!-- Панель внизу экрана -->
-    <div class="bottom-panel">
-        <button class="panel-button">Главная</button>
-        <button class="panel-button">Поиск</button>
-        <button class="panel-button">Профиль</button>
-    </div>
-
     <script>
         // Функция для открытия шторки
         function openDrawer(drawerId, closeBtnId) {
             const drawer = document.getElementById(drawerId);
             const closeBtn = document.getElementById(closeBtnId);
-            const bottomPanel = document.querySelector('.bottom-panel'); // Получаем панель
+            const topPanel = document.querySelector('.top-panel'); // Получаем панель
 
             // Блокируем все кнопки
             const buttons = document.querySelectorAll('.button, .big-button');
@@ -296,9 +290,6 @@
 
             // Затемняем фон
             document.body.classList.add('darkened');
-
-            // Скрываем панель
-            bottomPanel.classList.add('hidden');
 
             // Открываем шторку
             drawer.style.bottom = '0';
@@ -311,9 +302,6 @@
 
                 // Убираем затемнение фона
                 document.body.classList.remove('darkened');
-
-                // Показываем панель
-                bottomPanel.classList.remove('hidden');
 
                 // Разблокируем все кнопки
                 buttons.forEach(button => {
