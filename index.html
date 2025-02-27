@@ -19,7 +19,7 @@
             padding: 20px; /* Отступы вокруг контента */
             box-sizing: border-box; /* Учитываем padding в общей высоте */
             position: relative; /* Для позиционирования шторки */
-            overflow: auto; /* Разрешаем прокрутку */
+            overflow: hidden; /* Убираем прокрутку */
         }
 
         /* Затемнение фона при открытии шторки */
@@ -164,7 +164,7 @@
         /* Стили для шторки */
         .drawer {
             position: fixed;
-            bottom: -60%; /* Начальное положение шторки (скрыта) */
+            bottom: -100%; /* Начальное положение шторки (скрыта) */
             left: 0;
             width: 100%;
             height: 60%; /* Высота шторки до 60% экрана */
@@ -218,7 +218,8 @@
             height: 100%;
             background-color: #DCDCDC;
             transition: transform 0.5s ease;
-            z-index: 1002; /* Страница поверх всего */
+            z-index: 1; /* Страница под панелью */
+            padding-top: 60px; /* Отступ для панели */
         }
 
         /* Скрытая страница */
@@ -233,15 +234,15 @@
     </style>
 </head>
 <body>
+    <!-- Панель сверху (общая для всех страниц) -->
+    <div class="top-panel">
+        <button class="panel-button" id="profileButton">Профиль</button>
+        <button class="panel-button" id="homeButton">Главная</button>
+        <button class="panel-button">Рабочее место</button>
+    </div>
+
     <!-- Главная страница -->
     <div class="page visible" id="mainPage">
-        <!-- Панель сверху -->
-        <div class="top-panel">
-            <button class="panel-button" id="profileButton">Профиль</button>
-            <button class="panel-button" id="homeButton">Главная</button>
-            <button class="panel-button">Рабочее место</button>
-        </div>
-
         <!-- Контейнер для верхних кнопок -->
         <div class="button-container">
             <button class="button" id="button1">РАБОТАЙ С НАМИ</button>
@@ -258,12 +259,6 @@
 
     <!-- Страница профиля -->
     <div class="page hidden" id="profilePage">
-        <!-- Панель сверху -->
-        <div class="top-panel">
-            <button class="panel-button" id="homeButton2">Главная</button>
-            <button class="panel-button">Рабочее место</button>
-        </div>
-
         <!-- Контейнер для кнопки на странице профиля -->
         <div class="button-container">
             <button class="button" id="profileButton1">КНОПКА ПРОФИЛЯ</button>
@@ -332,7 +327,7 @@
 
             // Закрываем шторку при нажатии на крестик
             closeBtn.addEventListener('click', () => {
-                drawer.style.bottom = '-60%';
+                drawer.style.bottom = '-100%';
                 drawer.classList.remove('active');
 
                 // Убираем затемнение фона
@@ -362,13 +357,6 @@
 
         // Возврат на главную страницу
         document.getElementById('homeButton').addEventListener('click', () => {
-            document.getElementById('profilePage').classList.remove('visible');
-            document.getElementById('profilePage').classList.add('hidden');
-            document.getElementById('mainPage').classList.remove('hidden');
-            document.getElementById('mainPage').classList.add('visible');
-        });
-
-        document.getElementById('homeButton2').addEventListener('click', () => {
             document.getElementById('profilePage').classList.remove('visible');
             document.getElementById('profilePage').classList.add('hidden');
             document.getElementById('mainPage').classList.remove('hidden');
