@@ -19,7 +19,7 @@
             padding: 20px; /* Отступы вокруг контента */
             box-sizing: border-box; /* Учитываем padding в общей высоте */
             position: relative; /* Для позиционирования шторки */
-            overflow: hidden; /* Убираем прокрутку */
+            overflow: auto; /* Разрешаем прокрутку */
         }
 
         /* Затемнение фона при открытии шторки */
@@ -74,6 +74,8 @@
             gap: 20px; /* Расстояние между кнопками */
             margin-bottom: 20px; /* Отступ снизу */
             margin-top: 80px; /* Отступ сверху, чтобы не перекрывало панель */
+            padding-left: 20px; /* Отступ слева */
+            padding-right: 20px; /* Отступ справа */
         }
 
         /* Стиль для кнопок */
@@ -140,13 +142,15 @@
             text-align: center;
             text-decoration: none;
             transition: background-color 0.3s ease, transform 0.1s ease; /* Плавное изменение цвета и анимация */
-            width: 100%; /* Ширина равна ширине трех верхних кнопок */
+            width: calc(100% - 40px); /* Ширина с отступами */
             aspect-ratio: 1 / 1; /* Соотношение сторон 1:1 (высота равна ширине) */
             display: flex;
             justify-content: center;
             align-items: center;
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку на мобильных устройствах */
             margin-bottom: 60px; /* Отступ между кнопкой и нижней стенкой */
+            margin-left: 20px; /* Отступ слева */
+            margin-right: 20px; /* Отступ справа */
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Тень для текста */
             position: relative; /* Для позиционирования иконки */
         }
