@@ -19,7 +19,7 @@
             padding: 20px; /* Отступы вокруг контента */
             box-sizing: border-box; /* Учитываем padding в общей высоте */
             position: relative; /* Для позиционирования шторки */
-            overflow: hidden; /* Чтобы не было прокрутки при анимации */
+            overflow: auto; /* Разрешаем прокрутку */
         }
 
         /* Затемнение фона при открытии шторки */
@@ -238,7 +238,7 @@
         <!-- Панель сверху -->
         <div class="top-panel">
             <button class="panel-button" id="profileButton">Профиль</button>
-            <button class="panel-button">Главная</button>
+            <button class="panel-button" id="homeButton">Главная</button>
             <button class="panel-button">Рабочее место</button>
         </div>
 
@@ -260,8 +260,7 @@
     <div class="page hidden" id="profilePage">
         <!-- Панель сверху -->
         <div class="top-panel">
-            <button class="panel-button" id="backButton">Назад</button>
-            <button class="panel-button">Главная</button>
+            <button class="panel-button" id="homeButton2">Главная</button>
             <button class="panel-button">Рабочее место</button>
         </div>
 
@@ -362,7 +361,14 @@
         });
 
         // Возврат на главную страницу
-        document.getElementById('backButton').addEventListener('click', () => {
+        document.getElementById('homeButton').addEventListener('click', () => {
+            document.getElementById('profilePage').classList.remove('visible');
+            document.getElementById('profilePage').classList.add('hidden');
+            document.getElementById('mainPage').classList.remove('hidden');
+            document.getElementById('mainPage').classList.add('visible');
+        });
+
+        document.getElementById('homeButton2').addEventListener('click', () => {
             document.getElementById('profilePage').classList.remove('visible');
             document.getElementById('profilePage').classList.add('hidden');
             document.getElementById('mainPage').classList.remove('hidden');
