@@ -19,6 +19,7 @@
             padding: 20px; /* Отступы вокруг контента */
             box-sizing: border-box; /* Учитываем padding в общей высоте */
             position: relative; /* Для позиционирования шторки */
+            overflow: hidden; /* Чтобы не было прокрутки при анимации */
         }
 
         /* Затемнение фона при открытии шторки */
@@ -47,12 +48,6 @@
             padding: 10px 0;
             border-bottom: 2px solid black; /* Черная полоса вместо тени */
             z-index: 1001; /* Панель поверх всего контента */
-            transition: opacity 0.3s ease; /* Плавное затемнение */
-        }
-
-        /* Затемнение панели при открытии шторки */
-        body.darkened .top-panel {
-            opacity: 0.5; /* Полупрозрачность */
         }
 
         /* Стили для кнопок на панели (текст без фона) */
@@ -64,6 +59,7 @@
             cursor: pointer;
             padding: 10px;
             transition: color 0.3s ease; /* Плавное изменение цвета текста */
+            -webkit-tap-highlight-color: transparent; /* Убираем синюю подсветку */
         }
 
         /* Анимация при наведении на кнопку */
@@ -150,7 +146,7 @@
             justify-content: center;
             align-items: center;
             -webkit-tap-highlight-color: transparent; /* Убирает подсветку на мобильных устройствах */
-            margin-bottom: 40px; /* Отступ между кнопкой и нижней стенкой */
+            margin-bottom: 60px; /* Отступ между кнопкой и нижней стенкой */
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Тень для текста */
             position: relative; /* Для позиционирования иконки */
         }
@@ -193,6 +189,7 @@
             color: #333;
             transition: opacity 0.3s ease; /* Плавное появление крестика */
             opacity: 0; /* Начальное состояние - невидим */
+            -webkit-tap-highlight-color: transparent; /* Убираем синюю подсветку */
         }
 
         /* Показываем крестик при открытии шторки */
@@ -207,32 +204,72 @@
         }
 
         /* Блокировка кнопок */
-        .button.disabled, .big-button.disabled {
+        .button.disabled, .big-button.disabled, .panel-button.disabled {
             pointer-events: none; /* Отключаем клики */
             opacity: 0.5; /* Делаем кнопки полупрозрачными */
+        }
+
+        /* Анимация перехода на новую страницу */
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #DCDCDC;
+            transition: transform 0.5s ease;
+            z-index: 1002; /* Страница поверх всего */
+        }
+
+        /* Скрытая страница */
+        .page.hidden {
+            transform: translateX(-100%);
+        }
+
+        /* Видимая страница */
+        .page.visible {
+            transform: translateX(0);
         }
     </style>
 </head>
 <body>
-    <!-- Панель сверху -->
-    <div class="top-panel">
-        <button class="panel-button">Профиль</button>
-        <button class="panel-button">Главная</button>
-        <button class="panel-button">Рабочее место</button>
+    <!-- Главная страница -->
+    <div class="page visible" id="mainPage">
+        <!-- Панель сверху -->
+        <div class="top-panel">
+            <button class="panel-button" id="profileButton">Профиль</button>
+            <button class="panel-button">Главная</button>
+            <button class="panel-button">Рабочее место</button>
+        </div>
+
+        <!-- Контейнер для верхних кнопок -->
+        <div class="button-container">
+            <button class="button" id="button1">РАБОТАЙ С НАМИ</button>
+            <button class="button" id="button2">АКЦИЯ ДНЯ</button>
+            <button class="button" id="button3">НОВОСТИ</button>
+        </div>
+
+        <!-- Нижняя кнопка с изображением -->
+        <button class="big-button" id="button4"></button>
+
+        <!-- Вторая нижняя кнопка -->
+        <button class="big-button" id="button5"></button>
     </div>
 
-    <!-- Контейнер для верхних кнопок -->
-    <div class="button-container">
-        <button class="button" id="button1">РАБОТАЙ С НАМИ</button>
-        <button class="button" id="button2">АКЦИЯ ДНЯ</button>
-        <button class="button" id="button3">НОВОСТИ</button>
+    <!-- Страница профиля -->
+    <div class="page hidden" id="profilePage">
+        <!-- Панель сверху -->
+        <div class="top-panel">
+            <button class="panel-button" id="backButton">Назад</button>
+            <button class="panel-button">Главная</button>
+            <button class="panel-button">Рабочее место</button>
+        </div>
+
+        <!-- Контейнер для кнопки на странице профиля -->
+        <div class="button-container">
+            <button class="button" id="profileButton1">КНОПКА ПРОФИЛЯ</button>
+        </div>
     </div>
-
-    <!-- Нижняя кнопка с изображением -->
-    <button class="big-button" id="button4"></button>
-
-    <!-- Вторая нижняя кнопка -->
-    <button class="big-button" id="button5"></button>
 
     <!-- Шторки для каждой кнопки -->
     <div class="drawer" id="drawer1">
@@ -282,7 +319,7 @@
             const closeBtn = document.getElementById(closeBtnId);
 
             // Блокируем все кнопки
-            const buttons = document.querySelectorAll('.button, .big-button');
+            const buttons = document.querySelectorAll('.button, .big-button, .panel-button');
             buttons.forEach(button => {
                 button.classList.add('disabled');
             });
@@ -315,6 +352,22 @@
         document.getElementById('button3').addEventListener('click', () => openDrawer('drawer3', 'closeDrawer3'));
         document.getElementById('button4').addEventListener('click', () => openDrawer('drawer4', 'closeDrawer4'));
         document.getElementById('button5').addEventListener('click', () => openDrawer('drawer5', 'closeDrawer5'));
+
+        // Переход на страницу профиля
+        document.getElementById('profileButton').addEventListener('click', () => {
+            document.getElementById('mainPage').classList.remove('visible');
+            document.getElementById('mainPage').classList.add('hidden');
+            document.getElementById('profilePage').classList.remove('hidden');
+            document.getElementById('profilePage').classList.add('visible');
+        });
+
+        // Возврат на главную страницу
+        document.getElementById('backButton').addEventListener('click', () => {
+            document.getElementById('profilePage').classList.remove('visible');
+            document.getElementById('profilePage').classList.add('hidden');
+            document.getElementById('mainPage').classList.remove('hidden');
+            document.getElementById('mainPage').classList.add('visible');
+        });
     </script>
 </body>
 </html>
