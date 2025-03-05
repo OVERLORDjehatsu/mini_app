@@ -28,13 +28,12 @@
             border-radius: 0 0 20px 20px; /* Закругление нижних углов */
         }
 
-        /* Стили для кнопки */
+        /* Общие стили для кнопок */
         .my-button {
             position: absolute;
             top: 45%;
-            left: 5%;
-            width: 25%;
-            height: 30%;
+            width: 25%; /* Ширина кнопки */
+            height: 30%; /* Высота кнопки */
             background-color: #242424; /* Цвет кнопки */
             border-radius: 15px; /* Закругление углов */
             font-size: 2rem; /* Размер текста */
@@ -45,16 +44,36 @@
             border: none; /* Убираем границу */
         }
 
+        /* Первая кнопка (слева) */
+        .my-button.left {
+            left: 5%; /* Отступ слева */
+        }
+
+        /* Вторая кнопка (справа) */
+        .my-button.right {
+            right: 5%; /* Отступ справа */
+        }
+
         /* Эффект при наведении на кнопку */
         .my-button:hover {
             transform: scale(0.95); /* Уменьшение кнопки на 5% */
         }
 
+        /* Эффект при нажатии на кнопку */
+        .my-button:active {
+            transform: scale(0.9); /* Уменьшение кнопки на 10% */
+        }
+
+        /* Убираем синюю подсветку при нажатии */
+        .my-button::-moz-focus-inner {
+            border: 0;
+        }
+
         /* Медиазапрос для мобильных устройств */
         @media (max-width: 600px) {
             .my-button {
-                width: 40%;
-                height: 12vh;
+                width: 40%; /* Ширина кнопки */
+                height: 12vh; /* Высота кнопки */
                 font-size: 1.5rem; /* Уменьшаем размер текста */
             }
 
@@ -66,6 +85,7 @@
 </head>
 <body>
     <div class="top-panel"></div>
-    <button class="my-button"></button>
+    <button class="my-button left"></button>
+    <button class="my-button right"></button>
 </body>
 </html>
