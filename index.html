@@ -23,7 +23,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 37vh; /* Высота панели */
+            height: 37%; /* Высота панели */
             background-color: #242424; /* Темно-серый цвет */
             border-radius: 0 0 20px 20px; /* Закругление нижних углов */
         }
@@ -31,13 +31,13 @@
         /* Стили для кнопки */
         .my-button {
             position: absolute;
-            top: 250px;
-            left: 20px;
-            width: 150px; /* Ширина кнопки */
-            height: 70px; /* Высота кнопки */
+            top: 45%;
+            left: 5%;
+            width: 25%; /* Ширина кнопки */
+            height: 25%; /* Высота кнопки */
             background-color: #242424; /* Цвет кнопки */
             border-radius: 10px; /* Закругление углов */
-            font-size: 16px; /* Размер текста */
+            font-size: 2rem; /* Размер текста */
             cursor: pointer; /* Курсор в виде руки при наведении */
             transition: transform 0.2s
             outline: none;
@@ -46,6 +46,19 @@
         /* Эффект при наведении на кнопку */
         .my-button:hover {
             transform: scale(0.95);
+        }
+
+        /* Медиазапрос для мобильных устройств */
+        @media (max-width: 600px) {
+            .my-button {
+                width: 80%; /* Ширина кнопки — 80% от родительского элемента */
+                height: 10vh; /* Высота кнопки — 10% от высоты экрана */
+                font-size: 1.5rem; /* Уменьшаем размер текста */
+            }
+
+            .top-panel {
+                height: 40vh; /* Уменьшаем высоту панели */
+            }
         }
     </style>
 </head>
