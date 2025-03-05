@@ -1,280 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini App</title>
+    <title>Mini App</title>
     <style>
-        /* Устанавливаем фон для всей страницы */
+        /* Основной фон страницы */
         body {
             margin: 0;
             padding: 0;
-            background-color: #000000;
+            background-color: #000000; /* Черный фон */
+            height: 100vh;
             display: flex;
-            flex-direction: column; /* Элементы располагаются вертикально */
-            justify-content: flex-start; /* Выравнивание по верхнему краю */
-            align-items: flex-start; /* Выравнивание по левому краю */
-            height: 100vh; /* Занимает всю высоту экрана */
-            font-family: Arial, sans-serif;
-            padding: 20px; /* Отступы вокруг контента */
-            box-sizing: border-box; /* Учитываем padding в общей высоте */
-            position: relative; /* Для позиционирования шторки */
-            overflow: auto; /* Разрешаем прокрутку */
-        }
-
-        /* Затемнение фона при открытии шторки */
-        body.darkened::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5); /* Затемнение на 50% */
-            z-index: 999; /* Затемнение поверх всего, кроме шторки */
-            pointer-events: none; /* Чтобы клики проходили сквозь затемнение */
-        }
-
-
-
-        /* Стиль для нижней кнопки */
-        .big-button {
-            background-image: url('https://i.imgur.com/Tgyksns.png'); /* Изображение для нижней кнопки */
-            background-size: cover; /* Масштабирует изображение на всю кнопку */
-            background-position: center; /* Центрирует изображение */
-            background-color: #EBEBEB; /* Цвет кнопки */
-            color: black; /* Черный цвет текста */
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.1s ease; /* Плавное изменение цвета и анимация */
-            width: calc(100% - 40px); /* Ширина с отступами */
-            aspect-ratio: 1 / 1; /* Соотношение сторон 1:1 (высота равна ширине) */
-            display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            -webkit-tap-highlight-color: transparent; /* Убирает подсветку на мобильных устройствах */
-            margin-bottom: 60px; /* Отступ между кнопкой и нижней стенкой */
-            margin-left: 20px; /* Отступ слева */
-            margin-right: 20px; /* Отступ справа */
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Тень для текста */
-            position: relative; /* Для позиционирования иконки */
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            color: white;
         }
 
-        /* Анимация при нажатии */
-        .big-button:active {
-            transform: scale(0.95); /* Уменьшаем кнопку на 5% */
-        }
-
-        /* Дополнительные стили для нижней кнопки (при наведении) */
-        .big-button:hover {
-            background-color: #E6E6E6; /* Новый цвет при наведении */
-        }
-
-        /* Стили для шторки */
-        .drawer {
-            position: fixed;
-            bottom: -100%; /* Начальное положение шторки (скрыта) */
-            left: 0;
-            width: 100%;
-            height: 60%; /* Высота шторки до 60% экрана */
-            background-color: #DCDCDC; /* Цвет шторки */
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            transition: bottom 0.3s ease; /* Плавное выдвижение */
-            z-index: 1000; /* Шторка поверх всего контента */
-            overflow: hidden; /* Чтобы содержимое шторки не вызывало прокрутку */
-        }
-
-        /* Крестик для закрытия шторки */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #333;
-            transition: opacity 0.3s ease; /* Плавное появление крестика */
-            opacity: 0; /* Начальное состояние - невидим */
-            -webkit-tap-highlight-color: transparent; /* Убираем синюю подсветку */
-        }
-
-        /* Показываем крестик при открытии шторки */
-        .drawer.active .close-btn {
-            opacity: 1; /* Крестик становится видимым */
-        }
-
-        /* Контент внутри шторки */
-        .drawer-content {
-            padding: 20px;
-            color: #333;
-        }
-
-        /* Блокировка кнопок */
-        .button.disabled, .big-button.disabled, .panel-button.disabled {
-            pointer-events: none; /* Отключаем клики */
-            opacity: 0.5; /* Делаем кнопки полупрозрачными */
-        }
-
-        /* Анимация перехода на новую страницу */
-        .page {
+        /* Темно-серая панель */
+        .top-panel {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background-color: #DCDCDC;
-            transition: transform 0.5s ease;
-            z-index: 1; /* Страница под панелью */
-            padding-top: 60px; /* Отступ для панели */
+            height: 50vh; /* Половина высоты экрана */
+            background-color: #333333; /* Темно-серый цвет */
+            z-index: -1; /* Чтобы панель была под контентом */
         }
 
-        /* Скрытая страница */
-        .page.hidden {
-            transform: translateX(-100%);
-        }
-
-        /* Видимая страница */
-        .page.visible {
-            transform: translateX(0);
+        /* Контент */
+        .content {
+            z-index: 1; /* Чтобы текст был над панелью */
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <!-- Панель сверху (общая для всех страниц) -->
-    <div class="top-panel">
-        <button class="panel-button" id="profileButton">Профиль</button>
-        <button class="panel-button" id="homeButton">Главная</button>
-        <button class="panel-button">Рабочее место</button>
+    <div class="top-panel"></div>
+    <div class="content">
+        <h1>Привет, это мини-приложение!</h1>
+        <p>Темно-серая панель сверху — это просто фон.</p>
     </div>
-
-    <!-- Главная страница -->
-    <div class="page visible" id="mainPage">
-        <!-- Контейнер для верхних кнопок -->
-        <div class="button-container">
-            <button class="button" id="button1">РАБОТАЙ С НАМИ</button>
-            <button class="button" id="button2">АКЦИЯ ДНЯ</button>
-            <button class="button" id="button3">НОВОСТИ</button>
-        </div>
-
-        <!-- Нижняя кнопка с изображением -->
-        <button class="big-button" id="button4"></button>
-
-        <!-- Вторая нижняя кнопка -->
-        <button class="big-button" id="button5"></button>
-    </div>
-
-    <!-- Страница профиля -->
-    <div class="page hidden" id="profilePage">
-        <!-- Контейнер для кнопки на странице профиля -->
-        <div class="button-container">
-            <button class="button" id="profileButton1">КНОПКА ПРОФИЛЯ</button>
-        </div>
-    </div>
-
-    <!-- Шторки для каждой кнопки -->
-    <div class="drawer" id="drawer1">
-        <button class="close-btn" id="closeDrawer1">&times;</button>
-        <div class="drawer-content">
-            <h2>Информация для "РАБОТАЙ С НАМИ"</h2>
-            <p>Здесь будет информация о работе с нами.</p>
-        </div>
-    </div>
-
-    <div class="drawer" id="drawer2">
-        <button class="close-btn" id="closeDrawer2">&times;</button>
-        <div class="drawer-content">
-            <h2>Информация для "АКЦИЯ ДНЯ"</h2>
-            <p>Здесь будет информация об акции дня.</p>
-        </div>
-    </div>
-
-    <div class="drawer" id="drawer3">
-        <button class="close-btn" id="closeDrawer3">&times;</button>
-        <div class="drawer-content">
-            <h2>Информация для "НОВОСТИ"</h2>
-            <p>Здесь будут новости.</p>
-        </div>
-    </div>
-
-    <div class="drawer" id="drawer4">
-        <button class="close-btn" id="closeDrawer4">&times;</button>
-        <div class="drawer-content">
-            <h2>Информация для нижней кнопки 1</h2>
-            <p>Здесь будет информация для первой нижней кнопки.</p>
-        </div>
-    </div>
-
-    <div class="drawer" id="drawer5">
-        <button class="close-btn" id="closeDrawer5">&times;</button>
-        <div class="drawer-content">
-            <h2>Информация для нижней кнопки 2</h2>
-            <p>Здесь будет информация для второй нижней кнопки.</p>
-        </div>
-    </div>
-
-    <script>
-        // Функция для открытия шторки
-        function openDrawer(drawerId, closeBtnId) {
-            const drawer = document.getElementById(drawerId);
-            const closeBtn = document.getElementById(closeBtnId);
-
-            // Блокируем все кнопки
-            const buttons = document.querySelectorAll('.button, .big-button, .panel-button');
-            buttons.forEach(button => {
-                button.classList.add('disabled');
-            });
-
-            // Затемняем фон
-            document.body.classList.add('darkened');
-
-            // Открываем шторку
-            drawer.style.bottom = '0';
-            drawer.classList.add('active');
-
-            // Закрываем шторку при нажатии на крестик
-            closeBtn.addEventListener('click', () => {
-                drawer.style.bottom = '-100%';
-                drawer.classList.remove('active');
-
-                // Убираем затемнение фона
-                document.body.classList.remove('darkened');
-
-                // Разблокируем все кнопки
-                buttons.forEach(button => {
-                    button.classList.remove('disabled');
-                });
-            });
-        }
-
-        // Назначаем обработчики для каждой кнопки
-        document.getElementById('button1').addEventListener('click', () => openDrawer('drawer1', 'closeDrawer1'));
-        document.getElementById('button2').addEventListener('click', () => openDrawer('drawer2', 'closeDrawer2'));
-        document.getElementById('button3').addEventListener('click', () => openDrawer('drawer3', 'closeDrawer3'));
-        document.getElementById('button4').addEventListener('click', () => openDrawer('drawer4', 'closeDrawer4'));
-        document.getElementById('button5').addEventListener('click', () => openDrawer('drawer5', 'closeDrawer5'));
-
-        // Переход на страницу профиля
-        document.getElementById('profileButton').addEventListener('click', () => {
-            document.getElementById('mainPage').classList.remove('visible');
-            document.getElementById('mainPage').classList.add('hidden');
-            document.getElementById('profilePage').classList.remove('hidden');
-            document.getElementById('profilePage').classList.add('visible');
-        });
-
-        // Возврат на главную страницу
-        document.getElementById('homeButton').addEventListener('click', () => {
-            document.getElementById('profilePage').classList.remove('visible');
-            document.getElementById('profilePage').classList.add('hidden');
-            document.getElementById('mainPage').classList.remove('hidden');
-            document.getElementById('mainPage').classList.add('visible');
-        });
-    </script>
 </body>
 </html>
