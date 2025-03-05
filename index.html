@@ -9,8 +9,12 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #121212; /* Черный фон */
+            background-color: #000000; /* Черный фон */
             height: 100vh;
+            display: flex;
+            justify-content: center; /* Центрирование по горизонтали */
+            align-items: center; /* Центрирование по вертикали */
+            font-family: Arial, sans-serif;
         }
 
         /* Темно-серая панель */
@@ -19,8 +23,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 37vh; /* Измени это значение, чтобы изменить высоту панели */
-            background-color: #242424; /* Темно-серый цвет */
+            height: 50vh; /* Высота панели */
+            background-color: #333333; /* Темно-серый цвет */
             border-radius: 0 0 20px 20px; /* Закругление нижних углов */
         }
 
@@ -28,7 +32,7 @@
         .my-button {
             width: 150px; /* Ширина кнопки */
             height: 50px; /* Высота кнопки */
-            background-color: #242424;
+            background-color: #242424; /* Цвет кнопки */
             color: white; /* Цвет текста */
             border: none; /* Убираем стандартную рамку */
             border-radius: 10px; /* Закругление углов */
@@ -41,10 +45,10 @@
         .my-button:hover {
             background-color: #777777; /* Цвет кнопки при наведении */
         }
-
     </style>
 </head>
 <body>
     <div class="top-panel"></div>
+    <button class="my-button">Нажми меня</button>
 </body>
 </html>
