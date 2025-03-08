@@ -31,8 +31,6 @@
         /* Общие стили для кнопок */
         .my-button {
             position: absolute;
-            width: 31%; /* Ширина кнопки */
-            height: 45%; /* Высота кнопки */
             background-color: #242424; /* Цвет кнопки */
             border-radius: 20px; /* Закругление углов */
             font-size: 2rem; /* Размер текста */
@@ -48,21 +46,32 @@
         .my-button.left {
             top: 45%;
             left: 5%; /* Отступ слева */
+            width: 31%; /* Ширина кнопки */
+            height: 45%; /* Высота кнопки */
         }
 
         /* Вторая кнопка (справа) */
         .my-button.right {
             top: 45%;
             right: 5%; /* Отступ справа */
+            width: 31%; /* Ширина кнопки */
+            height: 45%; /* Высота кнопки */
         }
 
-        /* Третья кнопка (внизу) */
-        .my-button.bottom {
-            bottom: 35%; /* Отступ снизу */
-            left: 5%; /* Центрирование по горизонтали */
-            transform: translateX(-50%) scale(1); /* Центрирование + масштаб по умолчанию */
-            width: 8%; /* Ширина кнопки */
-            height: 15%; /* Высота кнопки */
+        /* Третья кнопка (под левой, левая часть) */
+        .my-button.bottom-left {
+            top: calc(45% + 50%); /* Под левой кнопкой */
+            left: 5%; /* Та же позиция по горизонтали */
+            width: 15.5%; /* Половина ширины левой кнопки */
+            height: 47%; /* Высота на 2% больше */
+        }
+
+        /* Четвертая кнопка (под левой, правая часть) */
+        .my-button.bottom-right {
+            top: calc(45% + 50%); /* Под левой кнопкой */
+            left: calc(5% + 15.5%); /* Рядом с левой частью */
+            width: 15.5%; /* Половина ширины левой кнопки */
+            height: 47%; /* Высота на 2% больше */
         }
 
         /* Эффект при наведении на кнопку */
@@ -76,11 +85,6 @@
             transition: transform 0.1s; /* Быстрая анимация при нажатии */
         }
 
-        /* Особый эффект для нижней кнопки при нажатии */
-        .my-button.bottom:active {
-            transform: translateX(-50%) scale(0.9); /* Центрирование + уменьшение */
-        }
-
         /* Медиазапрос для мобильных устройств */
         @media (max-width: 600px) {
             /* Стили для верхних кнопок */
@@ -91,12 +95,17 @@
                 font-size: 1.5rem; /* Уменьшаем размер текста */
             }
 
-            /* Стили для нижней кнопки */
-            .my-button.bottom {
-                width: 25%; /* Ширина кнопки */
-                height: 10vh; /* Высота кнопки */
+            /* Стили для нижних кнопок */
+            .my-button.bottom-left,
+            .my-button.bottom-right {
+                width: 21%; /* Половина ширины левой кнопки */
+                height: 22vh; /* Высота на 2% больше */
                 font-size: 1.2rem; /* Уменьшаем размер текста */
-                bottom: 20%; /* Отступ снизу */
+                top: calc(45% + 25vh); /* Позиция под левой кнопкой */
+            }
+
+            .my-button.bottom-right {
+                left: calc(5% + 21%); /* Рядом с левой частью */
             }
 
             /* Высота панели */
@@ -110,6 +119,7 @@
     <div class="top-panel"></div>
     <button class="my-button left"></button>
     <button class="my-button right"></button>
-    <button class="my-button bottom"></button>
+    <button class="my-button bottom-left"></button>
+    <button class="my-button bottom-right"></button>
 </body>
 </html>
