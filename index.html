@@ -31,7 +31,6 @@
         /* Общие стили для кнопок */
         .my-button {
             position: absolute;
-            top: 45%;
             width: 31%; /* Ширина кнопки */
             height: 45%; /* Высота кнопки */
             background-color: #242424; /* Цвет кнопки */
@@ -47,12 +46,23 @@
 
         /* Первая кнопка (слева) */
         .my-button.left {
+            top: 45%;
             left: 5%; /* Отступ слева */
         }
 
         /* Вторая кнопка (справа) */
         .my-button.right {
+            top: 45%;
             right: 5%; /* Отступ справа */
+        }
+
+        /* Третья кнопка (внизу) */
+        .my-button.bottom {
+            bottom: 25%; /* Отступ снизу */
+            left: 50%; /* Центрирование по горизонтали */
+            transform: translateX(-50%); /* Смещение для точного центрирования */
+            width: 15%; /* Ширина кнопки */
+            height: 15%; /* Высота кнопки */
         }
 
         /* Эффект при наведении на кнопку */
@@ -68,12 +78,23 @@
 
         /* Медиазапрос для мобильных устройств */
         @media (max-width: 600px) {
-            .my-button {
+            /* Стили для верхних кнопок */
+            .my-button.left,
+            .my-button.right {
                 width: 42%; /* Ширина кнопки */
                 height: 20vh; /* Высота кнопки */
                 font-size: 1.5rem; /* Уменьшаем размер текста */
             }
 
+            /* Стили для нижней кнопки */
+            .my-button.bottom {
+                width: 30%; /* Ширина кнопки */
+                height: 10vh; /* Высота кнопки */
+                font-size: 1.2rem; /* Уменьшаем размер текста */
+                bottom: 15%; /* Отступ снизу */
+            }
+
+            /* Высота панели */
             .top-panel {
                 height: 40vh; /* Уменьшаем высоту панели */
             }
@@ -84,5 +105,6 @@
     <div class="top-panel"></div>
     <button class="my-button left"></button>
     <button class="my-button right"></button>
+    <button class="my-button bottom"></button>
 </body>
 </html>
